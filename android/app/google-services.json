@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1067059869064",
+    "project_id": "colombo-firebase",
+    "storage_bucket": "colombo-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067059869064:android:49fa714483150a2b3e763d",
+        "android_client_info": {
+          "package_name": "com.example.travel_app_colombo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk2egFIWaQpp2YGRbfzaVLd50gfDESVPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
