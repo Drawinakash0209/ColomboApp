@@ -24,7 +24,7 @@ class DetailBottomBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Jami Ul-Alfar Mosque, Colombo",
+                      "Test",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
@@ -51,7 +51,7 @@ class DetailBottomBar extends StatelessWidget {
                   height: 25,
                 ),
                 Text(
-                  "Jami-Ul-Alfar Mosque is located in a busy town called Pettah which is less than 4 kilometers away from the heart of Colombo city. The mosque can be easily reached by both bus and tuk-tuk. If you are taking the bus, you need to get off at Petta Central Bus Station and after getting down take an 800-meters walk down the 2nd Cross Street. If you are getting into a tuk-tuk, they would directly drop you off in front of the mosque. Remember prayer times and Fridays can be too busy to visit.",
+                  "test",
                   style: TextStyle(
                     color: Colors.black26,
                     fontSize: 16,

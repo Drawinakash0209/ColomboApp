@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../widgets/bottom_nav_bar.dart';
@@ -28,6 +26,14 @@ class _HomePageState extends State<HomePage> {
     'National Museum',
     'Independence Square',
     'Lotus Tower'
+  ];
+
+  var description = [
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
   ];
 
   var placeNames = [
@@ -71,7 +77,8 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => DetailScreen(),
+                                    builder: (context) => DetailScreen(
+                                    ),
                                   ),
                                 );
                               },
@@ -121,7 +128,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Padding(
@@ -155,7 +164,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: 6,
@@ -180,7 +191,8 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black26,
                                 borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
-                                  image: AssetImage("images/place${index + 1}.jpg"),
+                                  image: AssetImage(
+                                      "images/place${index + 1}.jpg"),
                                   fit: BoxFit.cover,
                                   opacity: 0.8,
                                 ),
@@ -199,18 +211,27 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                Icon(Icons.more_vert, size: 30,),
+                                Icon(
+                                  Icons.more_vert,
+                                  size: 30,
+                                ),
                               ],
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(
+                            height: 5,
+                          ),
                           Row(
                             children: [
-                              Icon(Icons.star,
+                              Icon(
+                                Icons.star,
                                 color: Colors.amber,
                                 size: 20,
                               ),
-                              Text("4.5", style: TextStyle(fontWeight: FontWeight.w500),)
+                              Text(
+                                "4.5",
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              )
                             ],
                           )
                         ],

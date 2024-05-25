@@ -33,7 +33,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
-          fontSize: 16.0);
+          fontSize: 12.0);
     }
     permission = await Geolocator.requestPermission();
     permission = await Geolocator.checkPermission();
@@ -56,8 +56,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
       Placemark place = placemarks[0];
       setState(() {
         currentPosition = position;
-        currentAddress =
-            "${place.locality}, ${place.country}, ${place.postalCode}";
+        currentAddress = "${place.locality}, ${place.country}";
       });
     } catch (e) {
       print(e);

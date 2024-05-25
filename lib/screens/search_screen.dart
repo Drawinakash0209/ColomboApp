@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../model/locations_model.dart';
-import '../pallate.dart';
+import '../provider/places_provider.dart';
 import '../widgets/bottom_nav_bar.dart';
+import 'place_details_screen.dart';
 
 class SearchPage extends StatefulWidget {
   SearchPage({Key? key}) : super(key: key);
@@ -29,74 +30,45 @@ class _SearchPageState extends State<SearchPage> {
   List<LocationModel> display_list = List.from(location_list);
 
   void updatelist(String value) {
-
     setState(() {
-      display_list = location_list.where((element) => element.location_name!.toLowerCase().contains(value.toLowerCase())).toList();
-
+      display_list = location_list
+          .where((element) => element.location_name!
+              .toLowerCase()
+              .contains(value.toLowerCase()))
+          .toList();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white70,
-      body: Padding(
-        padding: EdgeInsets.only(
-          top: 80.0,
-          left: 20.0,
-          right: 20.0,
-          bottom: 20.0,
-        ),
+      body: FutureBuilder(
+          future: context.read<PlacesProvider>().fetchAndSetData(context),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('An error occurred: ${snapshot.error}'),
+              );
+            }
+            var places = context.read<PlacesProvider>().places;
+            return ListView.builder(
+                itemCount: places.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: ()=> Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context)=>PlaceDetails(place: places[index]))),
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Search for a location",
-              style: kBodyText,
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-
-            TextField(
-              onChanged: (value)=> updatelist(value),
-              style: TextStyle(fontSize: 16, fontWeight:FontWeight.normal, ),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white70,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide.none,
-                ),
-                hintText: "Eg: One Galle Face",
-                prefixIcon: Icon(Icons.search, color: Colors.blue, ),
-                hintStyle: TextStyle(color: Colors.black45),
-              ),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: display_list.length,
-                itemBuilder: (context, index) => ListTile(
-                  contentPadding: EdgeInsets.all(8),
-                  title: Text(
-                    display_list[index].location_name!,
-                    style: TextStyle(
-                        color: Colors.black45, fontWeight: FontWeight.bold),
-                  ),
-                 trailing: Text(
-                     '${display_list[index].location_rating!}', style: TextStyle(color: Colors.black26),
-                 ),
-
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+                    child: ListTile(
+                      title: Text(places[index].name!),
+                      subtitle: Text(places[index].category!),
+                    ),
+                  );
+                });
+          }),
       bottomNavigationBar: BottomNavBar(),
     );
   }

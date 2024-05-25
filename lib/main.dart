@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:travel_app_final/provider/places_provider.dart';
 
 import 'provider/theme_provider.dart';
 import 'screens/welcome_screen.dart';
@@ -37,8 +38,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => ThemeProvider(),
+  Widget build(BuildContext context) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => ThemeProvider()),
+          ChangeNotifierProvider(create: (_) => PlacesProvider()),
+        ],
         builder: (context, _) {
           final themeProvider = Provider.of<ThemeProvider>(context);
 
