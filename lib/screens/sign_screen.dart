@@ -20,11 +20,13 @@ class _SignPageState extends State<SignPage> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
 
+  @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,80 +61,33 @@ class _SignPageState extends State<SignPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            TextField(
-                              controller: _nameController,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.person),
-                                hintText: 'Na',
-                                border:
-                                    InputBorder.none, // Remove default border
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical:
-                                      15.0, // Adjust padding for TextInput look
-                                  horizontal: 10.0,
-                                ),
-                              ),
-                              keyboardType: TextInputType.name,
-                              textInputAction: TextInputAction.next,
-                            ),
-                            TextField(
-                              controller: _emailController,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.email),
-                                hintText: 'Emai',
-                                border:
-                                    InputBorder.none, // Remove default border
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical:
-                                      15.0, // Adjust padding for TextInput look
-                                  horizontal: 10.0,
-                                ),
-                              ),
-                              keyboardType: TextInputType.emailAddress,
-                              textInputAction: TextInputAction.next,
-                            ),
-                            TextField(
-                              controller: _passwordController,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.lock),
+                            _buildTextField(
+                                controller: _nameController,
+                                icon: Icons.person,
+                                hintText: 'Name'),
+                            SizedBox(height: 20),
+                            _buildTextField(
+                                controller: _emailController,
+                                icon: Icons.email,
+                                hintText: 'Email',
+                                keyboardType: TextInputType.emailAddress),
+                            SizedBox(height: 20),
+                            _buildTextField(
+                                controller: _passwordController,
+                                icon: Icons.lock,
                                 hintText: 'Password',
-                                border:
-                                    InputBorder.none, // Remove default border
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical:
-                                      15.0, // Adjust padding for TextInput look
-                                  horizontal: 10.0,
-                                ),
-                              ),
-                              obscureText: true,
-                              textInputAction: TextInputAction.done,
-                            ),
-                            TextField(
-                              controller: _confirmPasswordController,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.lock),
+                                obscureText: true),
+                            SizedBox(height: 20),
+                            _buildTextField(
+                                controller: _confirmPasswordController,
+                                icon: Icons.lock,
                                 hintText: 'Confirm Password',
-                                border:
-                                    InputBorder.none, // Remove default border
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical:
-                                      15.0, // Adjust padding for TextInput look
-                                  horizontal: 10.0,
-                                ),
-                              ),
-                              obscureText: true,
-                              textInputAction: TextInputAction.done,
-                            ),
+                                obscureText: true),
                           ],
                         ),
                         Column(
                           children: [
-                            SizedBox(
-                              height: 30,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            SizedBox(height: 30),
                             Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -163,22 +118,72 @@ class _SignPageState extends State<SignPage> {
     );
   }
 
+  Widget _buildTextField(
+      {required TextEditingController controller,
+      required IconData icon,
+      required String hintText,
+      bool obscureText = false,
+      TextInputType keyboardType = TextInputType.text}) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.grey.withOpacity(0.5),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(24)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(24)),
+        icon: Icon(icon, color: Colors.white),
+        hintText: hintText,
+        hintStyle: TextStyle(color: Colors.white70),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 15.0,
+          horizontal: 10.0,
+        ),
+      ),
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      textInputAction: TextInputAction.next,
+    );
+  }
+
   void _signup() async {
     String name = _nameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
     String confirmPassword = _confirmPasswordController.text;
 
+    if (password != confirmPassword) {
+      // Passwords do not match
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Passwords do not match'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
     if (user != null) {
+      // Sign up successful
       print('Sign up successful');
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } else {
-      print(email);
+      // Sign up failed
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Sign up failed. Please try again.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
       print('Sign up failed');
     }
   }

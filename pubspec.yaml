@@ -108,7 +108,15 @@ flutter:
     - images/place4.jpg
     - images/place5.jpg
     - images/place6.jpg
+    - images/gallefacegreen2.jpg
+    - images/colomboMuseum.jpg
+    - images/kelaniraja.jpg
+    - images/viharamahadevi.jpg
+    - images/gangaramaya.jpg
+    - images/independence.jpg
+    - images/pettah.jpg
     - assets/places.json
+  
 
   #   - images/a_dot_ham.jpeg
 

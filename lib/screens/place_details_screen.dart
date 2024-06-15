@@ -16,7 +16,7 @@ class _PlaceDetailsState extends State<PlaceDetails> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('images/detail1.jpg'),
+          image: AssetImage(widget.place.image!),
           fit: BoxFit.cover,
           opacity: 0.7,
         ),

@@ -9,9 +9,10 @@ class Place {
   final String? category;
   final double? latitude;
   final double? longitude;
+  final String? image;
 
   Place(this.id, this.name, this.description, this.category, this.latitude,
-      this.longitude);
+      this.longitude, this.image);
 }
 
 class PlacesProvider with ChangeNotifier {
@@ -36,6 +37,7 @@ class PlacesProvider with ChangeNotifier {
           data[i]['category'],
           data[i]['latitude'],
           data[i]['longitude'],
+          data[i]['image'],
         ));
       }
       _places = fetched;

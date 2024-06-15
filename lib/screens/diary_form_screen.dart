@@ -231,7 +231,9 @@ class _DiaryFormScreenState extends State<DiaryFormScreen> {
                       color: Colors.blue,
                     ),
               SizedBox(height: 20),
-              ElevatedButton(onPressed: postDiary, child: Text("Save")),
+              Center(
+                  child: ElevatedButton(
+                      onPressed: postDiary, child: Text("Save"))),
             ],
           ),
         ),

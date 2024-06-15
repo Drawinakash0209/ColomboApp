@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../model/locations_model.dart';
 import '../provider/places_provider.dart';
 import '../widgets/bottom_nav_bar.dart';
+import '../widgets/search_input.dart';
 import 'place_details_screen.dart';
 
 class SearchPage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _SearchPageState extends State<SearchPage> {
 
   List<LocationModel> display_list = List.from(location_list);
 
-  void updatelist(String value) {
+  void updateList(String value) {
     setState(() {
       display_list = location_list
           .where((element) => element.location_name!
@@ -43,32 +44,45 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white70,
-      body: FutureBuilder(
-          future: context.read<PlacesProvider>().fetchAndSetData(context),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('An error occurred: ${snapshot.error}'),
-              );
-            }
-            var places = context.read<PlacesProvider>().places;
-            return ListView.builder(
-                itemCount: places.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: ()=> Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context)=>PlaceDetails(place: places[index]))),
-
-                    child: ListTile(
-                      title: Text(places[index].name!),
-                      subtitle: Text(places[index].category!),
-                    ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          searchinput(), // Include the searchinput widget here
+          Expanded(
+            child: FutureBuilder(
+              future: context.read<PlacesProvider>().fetchAndSetData(context),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('An error occurred: ${snapshot.error}'),
                   );
-                });
-          }),
+                }
+                var places = context.read<PlacesProvider>().places;
+                return ListView.builder(
+                  itemCount: places.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PlaceDetails(place: places[index]),
+                        ),
+                      ),
+                      child: ListTile(
+                        title: Text(places[index].name!),
+                        subtitle: Text(places[index].category!),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavBar(),
     );
   }

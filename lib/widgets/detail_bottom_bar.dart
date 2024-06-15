@@ -24,7 +24,7 @@ class DetailBottomBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Test",
+                      "Jami Ul-Alfar Mosque",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
@@ -51,7 +51,9 @@ class DetailBottomBar extends StatelessWidget {
                   height: 25,
                 ),
                 Text(
-                  "test",
+                  
+
+"The Jami Ul-Alfar Mosque, also known as the Red Mosque, is a historic landmark in Colombo, Sri Lanka, famous for its striking red and white candy-striped brickwork. Built in 1908, it blends Indian, Moorish, and Indo-Islamic architectural styles. Located in the bustling Pettah district, it stands as a symbol of religious harmony and cultural diversity in Sri Lanka. The mosque welcomes visitors outside of prayer times, offering them a glimpse of its unique design and cultural significance within the local Muslim community.",
                   style: TextStyle(
                     color: Colors.black26,
                     fontSize: 16,

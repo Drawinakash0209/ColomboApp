@@ -5,7 +5,8 @@
     "description": "A scenic promenade along the Indian Ocean, popular for relaxation, kite flying, and street food. Families gather for picnics on the grassy lawns, while vendors offer a vibrant selection of local snacks and drinks. During the evenings, the promenade comes alive with the sounds of laughter and music, making it a popular spot for locals and tourists alike.",
     "category": "attraction",
     "latitude": 6.927778,
-    "longitude": 79.847222
+    "longitude": 79.847222,
+    "image": "images/gallefacegreen2.jpg"
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "description": "Sri Lanka's largest museum, showcasing the country's rich history and culture through an extensive collection of artifacts. Explore exhibits ranging from prehistoric times to the colonial era, gaining insights into Sri Lanka's unique blend of Buddhist, Hindu, and European influences. The museum also houses valuable sculptures, paintings, and archaeological finds, offering a glimpse into the island nation's fascinating past.",
     "category": "museum",
     "latitude": 6.910333,
-    "longitude": 79.850389
+    "longitude": 79.850389,
+    "image": "images/colomboMuseum.jpg"
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "description": "A Buddhist temple complex with historical significance dating back to the 5th century BCE.  This revered site is one of the oldest Buddhist temples in Sri Lanka and is believed to enshrine a hair relic of the Buddha. The temple complex boasts intricate architecture, serene courtyards, and a peaceful atmosphere. Visitors can participate in meditation sessions, observe daily rituals, or simply wander the grounds and soak in the spiritual ambiance.",
     "category": "temple",
     "latitude": 6.937778,
-    "longitude": 79.900833
+    "longitude": 79.900833,
+    "image": "images/kelaniraja.jpg"
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "description": "The oldest public park in Colombo, featuring a Buddha statue, fountains, and a mini zoo. This historic park offers a haven of tranquility amidst the bustling city. Visitors can stroll along the tree-lined paths, relax on the benches, or enjoy a picnic on the lawns. The park is also home to a giant Buddha statue, a picturesque lake, and a mini zoo, making it a popular destination for families and nature lovers.",
     "category": "park",
     "latitude": 6.912222,
-    "longitude": 79.853889
+    "longitude": 79.853889,
+    "image": "images/viharamahadevi.jpg"
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "description": "A revered Buddhist temple known for its diverse architecture and collection of religious artifacts. This magnificent temple complex showcases a blend of Sri Lankan, Indian, Chinese, and Thai architectural styles.  Inside, visitors can explore a vast collection of Buddha statues, murals, and other religious objects. The temple also houses a library with ancient palm-leaf manuscripts and a museum with archaeological finds. Gangaramaya Temple is a must-visit for anyone interested in Sri Lankan Buddhism and culture.",
     "category": "temple",
     "latitude": 6.908333,
-    "longitude": 79.855833
+    "longitude": 79.855833,
+    "image": "images/gangaramaya.jpg"
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "description": "A historic square commemorating Sri Lanka's independence, featuring monuments and government buildings. This significant landmark stands as a symbol of Sri Lanka's freedom struggle. Visitors can admire the imposing architecture of the surrounding buildings, including the Independence Memorial Hall and the Sri Lanka Parliament Complex. Independence Square is a popular spot for locals and tourists alike, offering a glimpse into the country's history and political landscape.",
     "category": "landmark",
     "latitude": 6.917222,
-    "longitude": 79.852222
+    "longitude": 79.852222,
+    "image": "images/independence.jpg"
   },
   {
     "id": 7,
@@ -53,7 +59,8 @@
     "description": "A vibrant market offering a unique shopping experience in the heart of Colombo (located in the Pettah district, known for its bustling atmosphere). Vendors sell a variety of goods on boats and stalls, creating a dynamic marketplace. Great for finding local produce, fresh seafood, souvenirs, and experiencing a slice of Colombo's daily life. Be prepared for the crowds and the lively atmosphere.",
     "category": "market",
     "latitude": 6.917222,
-    "longitude": 79.850000
+    "longitude": 79.850000,
+    "image": "images/pettah.jpg"
   }
       
     ]

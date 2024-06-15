@@ -18,10 +18,13 @@ class _LoginPageState extends State<LoginPage> {
   final FirebaseAuthServices _auth = FirebaseAuthServices();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  String _errorMessage = '';
 
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,44 +60,31 @@ class _LoginPageState extends State<LoginPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            TextField(
-                              controller: _emailController,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.email),
-                                hintText: 'Emai',
-                                border:
-                                    InputBorder.none, // Remove default border
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical:
-                                      15.0, // Adjust padding for TextInput look
-                                  horizontal: 10.0,
-                                ),
-                              ),
-                              keyboardType: TextInputType.emailAddress,
-                              textInputAction: TextInputAction.next,
-                            ),
-                            TextField(
-                              controller: _passwordController,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.lock),
+                            _buildTextField(
+                                controller: _emailController,
+                                icon: Icons.email,
+                                hintText: 'Email',
+                                keyboardType: TextInputType.emailAddress),
+                            SizedBox(height: 20),
+                            _buildTextField(
+                                controller: _passwordController,
+                                icon: Icons.lock,
                                 hintText: 'Password',
-                                border:
-                                    InputBorder.none, // Remove default border
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical:
-                                      15.0, // Adjust padding for TextInput look
-                                  horizontal: 10.0,
-                                ),
-                              ),
-                              obscureText: true,
-                              textInputAction: TextInputAction.done,
-                            ),
+                                obscureText: true),
                             Text(
                               'Forgot password?',
                               style: kBodyText,
                             ),
                           ],
                         ),
+                        if (_errorMessage.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Text(
+                              _errorMessage,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
                         Column(
                           children: [
                             SizedBox(
@@ -159,6 +149,38 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _buildTextField(
+      {required TextEditingController controller,
+      required IconData icon,
+      required String hintText,
+      bool obscureText = false,
+      TextInputType keyboardType = TextInputType.text}) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.grey.withOpacity(0.5),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(24)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(24)),
+        icon: Icon(icon, color: Colors.white),
+        hintText: hintText,
+        hintStyle: TextStyle(color: Colors.white70),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 15.0,
+          horizontal: 10.0,
+        ),
+      ),
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      textInputAction: TextInputAction.next,
+    );
+  }
+
   void _signin() async {
     String email = _emailController.text;
     String password = _passwordController.text;
@@ -172,8 +194,10 @@ class _LoginPageState extends State<LoginPage> {
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } else {
-      print(email);
       print('Sign in failed');
+      setState(() {
+        _errorMessage = 'Invalid email or password. Please try again.';
+      });
     }
   }
 }
